@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Domain.Models;
 
 namespace Service.Interfaces
 {
     public interface IOrderService
     {
-        int InsertOrder(Order entity);
+        Task<int> InsertOrderAsync(Order entity);
 
-        IEnumerable<Order> GetOrders();
+        Task<IEnumerable<Order>> GetOrdersAsync();
 
-        bool DeleteOrder(int id);
+        Task<bool> DeleteOrderAsync(int id);
 
-        int UpdateOrder(Order entity);
+        Task<int> UpdateOrderAsync(Order entity);
     }
 }

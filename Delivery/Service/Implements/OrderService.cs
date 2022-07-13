@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using DAL.Interfaces;
 using Domain.Models;
 using Service.Interfaces;
@@ -15,68 +15,32 @@ namespace Service.Implements
             _orderRepo = orderRepo;
         }
 
-        public int InsertOrder(Order entity)
+        public async Task<int> InsertOrderAsync(Order entity)
         {
-            try
-            {
-                var response = _orderRepo.Insert(entity);
+            var response = await _orderRepo.InsertAsync(entity);
 
-                return response;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"[InsertOrder]: {e}");
-
-                return 0;
-            }
+            return response;
         }
 
-        public IEnumerable<Order> GetOrders()
+        public async Task<IEnumerable<Order>> GetOrdersAsync()
         {
-            try
-            {
-                var response = _orderRepo.GetAll();
+            var response = await _orderRepo.GetAllAsync();
 
-                return response;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"[GetOrders]: {e}");
-
-                return new List<Order>();
-            }
+            return response;
         }
 
-        public bool DeleteOrder(int id)
+        public async Task<bool> DeleteOrderAsync(int id)
         {
-            try
-            {
-                var response = _orderRepo.Delete(id);
+            var response = await _orderRepo.DeleteAsync(id);
 
-                return response;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"[DeleteOrder]: {e}");
-
-                return false;
-            }
+            return response;
         }
 
-        public int UpdateOrder(Order entity)
+        public async Task<int> UpdateOrderAsync(Order entity)
         {
-            try
-            {
-                var response = _orderRepo.Update(entity);
+            var response = await _orderRepo.UpdateAsync(entity);
 
-                return response;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"[UpdateOrder]: {e}");
-
-                return 0;
-            }
+            return response;
         }
     }
 }

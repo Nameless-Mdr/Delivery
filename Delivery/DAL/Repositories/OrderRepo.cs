@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DAL.Interfaces;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories
 {
@@ -14,36 +16,37 @@ namespace DAL.Repositories
             _db = db;
         }
 
-        public int Insert(Order entity)
+        public async Task<int> InsertAsync(Order entity)
         {
-            _db.Order.Add(entity);
+            await _db.Order.AddAsync(entity);
 
-            return _db.SaveChanges();
+            return await _db.SaveChangesAsync();
         }
 
-        public IEnumerable<Order> GetAll()
+        public Task<List<Order>> GetAllAsync()
         {
-            return _db.Order;
+            return _db.Order.ToListAsync();
         }
 
-        public bool Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var order = GetAll().FirstOrDefault(x => x.Id == id);
+            var order = await _db.Order.FirstOrDefaultAsync(x => x.Id == id);
 
             if (order != null)
             {
                 _db.Remove(order);
-                return _db.SaveChanges() > 0;
+
+                return await _db.SaveChangesAsync() > 0;
             }
 
             return false;
         }
 
-        public int Update(Order entity)
+        public async Task<int> UpdateAsync(Order entity)
         {
             _db.Update(entity);
 
-            return _db.SaveChanges();
+            return await _db.SaveChangesAsync();
         }
     }
 }

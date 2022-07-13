@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
@@ -18,36 +19,36 @@ namespace Delivery.Controllers
 
         [HttpGet]
         [Route("getAllOrders")]
-        public IEnumerable<Order> GetAll()
+        public async Task<IEnumerable<Order>> GetAllAsync()
         {
-            var response =  _orderService.GetOrders();
+            var response = await _orderService.GetOrdersAsync();
 
             return response;
         }
 
         [HttpPost]
         [Route("insertOrder")]
-        public int Insert([FromBody] Order entity)
+        public async Task<int> InsertAsync([FromBody] Order entity)
         {
-            var response = _orderService.InsertOrder(entity);
+            var response = await _orderService.InsertOrderAsync(entity);
 
             return response;
         }
 
         [HttpPut]
         [Route("updateOrder")]
-        public int Update([FromBody] Order entity)
+        public async Task<int> UpdateAsync([FromBody] Order entity)
         {
-            var response = _orderService.UpdateOrder(entity);
+            var response = await _orderService.UpdateOrderAsync(entity);
 
             return response;
         }
 
         [HttpDelete]
         [Route("deleteOrder")]
-        public bool Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var response = _orderService.DeleteOrder(id);
+            var response = await _orderService.DeleteOrderAsync(id);
 
             return response;
         }

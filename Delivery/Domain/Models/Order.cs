@@ -8,7 +8,7 @@ namespace Domain.Models
     /// Заказ
     /// </summary>
 
-    [Table("order", Schema = "info")]
+    [Table("orders", Schema = "info")]
     public class Order
     {
         [Key]

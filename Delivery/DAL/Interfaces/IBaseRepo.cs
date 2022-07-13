@@ -1,15 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Domain.Models;
 
 namespace DAL.Interfaces
 {
     public interface IBaseRepo<T>
     {
-        int Insert(T entity);
+        Task<int> InsertAsync(T entity);
 
-        IEnumerable<T> GetAll();
+        Task<List<Order>> GetAllAsync();
 
-        bool Delete(int id);
+        Task<bool> DeleteAsync(int id);
 
-        int Update(T entity);
+        Task<int> UpdateAsync(T entity);
     }
 }
