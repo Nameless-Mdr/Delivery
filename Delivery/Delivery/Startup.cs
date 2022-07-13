@@ -24,7 +24,7 @@ namespace Delivery
         {
             var connection = Configuration.GetConnectionString("PostgresConnection");
 
-            services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connection));
+            services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connection, settings => settings.MigrationsAssembly("Delivery")));
 
             services.AddControllers();
 
