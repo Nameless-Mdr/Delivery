@@ -23,9 +23,9 @@ namespace DAL.Repositories
             return await _db.SaveChangesAsync();
         }
 
-        public Task<List<Order>> GetAllAsync()
+        public async Task<List<Order>> GetAllAsync()
         {
-            return _db.Order.ToListAsync();
+            return await _db.Order.ToListAsync();
         }
 
         public async Task<bool> DeleteAsync(int id)
