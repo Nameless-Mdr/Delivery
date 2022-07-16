@@ -24,7 +24,7 @@ namespace Service.Implements
 
         public async Task<IEnumerable<Order>> GetOrdersAsync()
         {
-            var response = await _orderRepo.GetAllAsync();
+            var response = await _orderRepo.GetAllAsync() ?? new List<Order>();
 
             return response;
         }

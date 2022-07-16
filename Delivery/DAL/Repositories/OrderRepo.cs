@@ -20,10 +20,12 @@ namespace DAL.Repositories
         {
             await _db.Order.AddAsync(entity);
 
-            return await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
+
+            return entity.Id ?? -1;
         }
 
-        public async Task<List<Order>> GetAllAsync()
+        public async Task<IEnumerable<Order>> GetAllAsync()
         {
             return await _db.Order.ToListAsync();
         }
@@ -32,14 +34,12 @@ namespace DAL.Repositories
         {
             var order = await _db.Order.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (order != null)
-            {
-                _db.Remove(order);
+            if (order == null) return false;
 
-                return await _db.SaveChangesAsync() > 0;
-            }
+            _db.Remove(order);
 
-            return false;
+            return await _db.SaveChangesAsync() > 0;
+
         }
 
         public async Task<int> UpdateAsync(Order entity)

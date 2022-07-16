@@ -8,7 +8,7 @@ namespace DAL.Interfaces
     {
         Task<int> InsertAsync(T entity);
 
-        Task<List<Order>> GetAllAsync();
+        Task<IEnumerable<Order>> GetAllAsync();
 
         Task<bool> DeleteAsync(int id);
 
