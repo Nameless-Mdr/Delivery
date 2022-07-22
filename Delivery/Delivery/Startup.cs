@@ -1,4 +1,5 @@
 using DAL;
+using Delivery.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -60,9 +61,11 @@ namespace Delivery
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Delivery v1"));
             }
 
-            app.UseHttpsRedirection();
+            app.UseCustomExceptionHandler();
 
             app.UseRouting();
+
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
